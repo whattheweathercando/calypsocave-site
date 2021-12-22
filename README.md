@@ -1,3 +1,3 @@
 # CALYPSO CAVE
 
-https://www.calypsocave.site
+calypsocave.site
