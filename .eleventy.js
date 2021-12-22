@@ -1,3 +1,5 @@
+const markdownIt = require("markdown-it");
+
 module.exports = function (eleventyConfig) {
 
     // https://www.11ty.dev/docs/data-deep-merge/
@@ -19,7 +21,18 @@ module.exports = function (eleventyConfig) {
             window.calypsoData = ${JSON.stringify(data)};
             // console.log(calypsoData);
         </script>`;
-    })
+    });
+
+    // markdown filter
+    // options: https://github.com/markdown-it/markdown-it#init-with-presets-and-options
+    const md = new markdownIt({
+        html: true,
+        breaks: false,
+    });
+    eleventyConfig.addFilter("markdown", (content) => {
+        return md.render(content);
+    });
+
     
 
     return {

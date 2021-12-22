@@ -18,7 +18,7 @@ html {
     font-size: var(--font-size-base);
 }
 body {
-    padding: 1rem;
+    /* padding: 1rem; */
     font-family: var(--font-family-serif);
 }
 footer {
@@ -27,15 +27,37 @@ footer {
     height: auto;
     bottom: 0;
 }
-
-#image-container {
+#cave-1, #cave-2 {
+    position: absolute;
     width: 50vw;
-    height: 50vh;
+    min-height: 100vh;
+    top: 0;
 }
-#image-filename {
+#cave-2 {
+    right: 0;
+}
+
+
+.image-filename {
     display: none;
 }
 
-#caption {
-    width: 50vw;
+.image-container {
+    width: 100%;
+    height: 50vh;
+}
+/* .image {} */
+.landscape {
+    width: 100%;
+    height: auto;
+}
+.portrait {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+}
+
+/* .caption {}  */
+.date-source {
+    font-size: var(--font-size-small);
 }

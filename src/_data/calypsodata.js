@@ -18,7 +18,9 @@ module.exports = () => {
               calypsoData.push({
                 id: record.get('ID'),
                 caption: record.get('caption'),
-                imageFilename: record.get('image-filename')
+                imageFilename: record.get('image-filename'),
+                dateSource: record.get('date-source'),
+                category: record.get('category')
               });
             });
             fetchNextPage();
