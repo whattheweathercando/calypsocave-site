@@ -1,0 +1,25 @@
+{
+  "name": "calypsocave-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "build": "eleventy",
+    "watch": "eleventy --watch",
+    "serve": "eleventy --serve",
+    "start": "eleventy --serve --watch",
+    "debug": "DEBUG=* eleventy",
+    "clean": "rm -rf ./dist/*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1"
+  },
+  "dependencies": {
+    "@11ty/eleventy-cache-assets": "^2.3.0",
+    "airtable": "^0.11.1",
+    "dotenv": "^10.0.0"
+  }
+}

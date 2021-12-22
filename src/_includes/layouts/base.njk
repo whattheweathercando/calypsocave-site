@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "partials/head.njk" %}
+<body>
+    <main>
+		{{ content | safe }}
+	</main>
+    {% expose calypsodata %}
+    <script src="js/index.js"></script>
+</body>
+</html>
+
+
+    
