@@ -10,7 +10,7 @@ module.exports = () => {
     let calypsoData = [];
       base('CC-main') 
         .select({ 
-            view: 'book' 
+            view: 'web' 
         })
         .eachPage(
           function page(records, fetchNextPage) {

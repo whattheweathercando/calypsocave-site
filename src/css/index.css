@@ -22,6 +22,7 @@ body {
     font-family: var(--font-family-system);
 }
 footer {
+    display: none;
     position: fixed;
     width: 100vw;
     height: auto;
@@ -61,5 +62,7 @@ footer {
     padding: 1em 0;
 } 
 .date-source {
+    position: absolute;
+    bottom: 0;
     font-size: var(--font-size-small);
 }

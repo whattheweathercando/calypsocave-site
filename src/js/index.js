@@ -1,5 +1,4 @@
-console.log(calypsoData);
-
+//console.log(calypsoData);
 
 // markdown-it in browser, added to "window" on script load
 // const md = window.markdownit();
@@ -15,21 +14,22 @@ const dataParsed = calypsoData.map(obj => {
     rObj.id = obj.id
     rObj.category = obj.category
     rObj.imageFilename = obj.imageFilename
+    rObj.dateSource = obj.dateSource
     // parse caption markdown
     rObj.caption = md.render(`${obj.caption}`)
     return rObj
 })
-console.log(dataParsed);
+//console.log(dataParsed);
 
 
 
 // filter data cat 1 / 2 
 const data1 = dataParsed.filter(entry => entry.category == 1);
 //console.log("CALYPSO CAVE DATA 1");
-//console.log(data1);
+console.log(data1);
 const data2 = dataParsed.filter(entry => entry.category == 2);
 //console.log("CALYPSO CAVE DATA 2");
-//console.log(data2);
+console.log(data2);
 
 const filename1 = document.querySelector('#image-filename-1');
 const image1 = document.querySelector('#image-1');
@@ -67,7 +67,21 @@ setContent(i);
 // page content navigation 
 
 function nextEntry(){
-    i++;
+    if (i < data1.length-1){
+        i++;
+    } else {
+        i = 0;
+    }
+    console.log(i);
+    setContent(i);
+}
+function previousEntry(){
+    if (i > 0){
+        i--;
+    } else {
+        i = data1.length-1;
+    }
+    console.log(i);
     setContent(i);
 }
 
@@ -78,6 +92,7 @@ document.addEventListener('keydown', function(e) {
     switch (e.keyCode) {
         case 37:
             //console.log('left');
+            previousEntry();
             break;
         case 38:
             //console.log('up');

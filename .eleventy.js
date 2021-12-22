@@ -21,19 +21,7 @@ module.exports = function (eleventyConfig) {
             window.calypsoData = ${JSON.stringify(data)};
             // console.log(calypsoData);
         </script>`;
-    });
-
-    // markdown filter
-    // options: https://github.com/markdown-it/markdown-it#init-with-presets-and-options
-    const md = new markdownIt({
-        html: true,
-        breaks: false,
-    });
-    eleventyConfig.addFilter("parseMarkdown", (content) => {
-        return md.render(content);
-    });
-
-    
+    });    
 
     return {
         dir: {
