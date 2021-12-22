@@ -1,3 +1,3 @@
-# calypsocave-site
+# CALYPSO CAVE
 
 https://www.calypsocave.site
