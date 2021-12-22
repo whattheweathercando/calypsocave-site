@@ -19,7 +19,7 @@ html {
 }
 body {
     /* padding: 1rem; */
-    font-family: var(--font-family-serif);
+    font-family: var(--font-family-system);
 }
 footer {
     position: fixed;
@@ -57,7 +57,9 @@ footer {
     max-width: 100%;
 }
 
-/* .caption {}  */
+.caption {
+    padding: 1em 0;
+} 
 .date-source {
     font-size: var(--font-size-small);
 }

@@ -29,7 +29,7 @@ module.exports = function (eleventyConfig) {
         html: true,
         breaks: false,
     });
-    eleventyConfig.addFilter("markdown", (content) => {
+    eleventyConfig.addFilter("parseMarkdown", (content) => {
         return md.render(content);
     });
 

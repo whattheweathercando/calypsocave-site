@@ -1,12 +1,35 @@
+console.log(calypsoData);
 
-// console.log(calypsoData);
+
+// markdown-it in browser, added to "window" on script load
+// const md = window.markdownit();
+const md = window.markdownit({
+    html: true,
+    breaks: true,
+});
+// var result = md.render('# markdown-it rulezz!');
+
+const dataParsed = calypsoData.map(obj => {
+    let rObj = {}
+    // todo : better way to pass key/value pairs unchanged
+    rObj.id = obj.id
+    rObj.category = obj.category
+    rObj.imageFilename = obj.imageFilename
+    // parse caption markdown
+    rObj.caption = md.render(`${obj.caption}`)
+    return rObj
+})
+console.log(dataParsed);
+
+
+
 // filter data cat 1 / 2 
-const data1 = calypsoData.filter(entry => entry.category == 1);
-console.log("CALYPSO CAVE DATA 1");
-console.log(data1);
-const data2 = calypsoData.filter(entry => entry.category == 2);
-console.log("CALYPSO CAVE DATA 2");
-console.log(data2);
+const data1 = dataParsed.filter(entry => entry.category == 1);
+//console.log("CALYPSO CAVE DATA 1");
+//console.log(data1);
+const data2 = dataParsed.filter(entry => entry.category == 2);
+//console.log("CALYPSO CAVE DATA 2");
+//console.log(data2);
 
 const filename1 = document.querySelector('#image-filename-1');
 const image1 = document.querySelector('#image-1');
