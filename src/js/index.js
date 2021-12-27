@@ -14,6 +14,10 @@ const dataParsed = calypsoData.map(obj => {
     rObj.id = obj.id
     rObj.category = obj.category
     rObj.imageFilename = obj.imageFilename
+    // rObj.imageWidth = obj.image[0].width
+    // rObj.imageHeight = obj.image[0].height
+    // rObj.imageRatio = rObj.imageWidth / rObj.imageHeight
+    rObj.imageRatio = obj.image[0].width / obj.image[0].height
     rObj.dateSource = obj.dateSource
     // parse caption markdown
     rObj.caption = md.render(`${obj.caption}`)
@@ -46,13 +50,29 @@ const nextButton = document.querySelector('#next-button');
 
 let i = 0;
 
+function calcRatio(ratio) {
+    let imageFormat = "";
+    if ( ratio < 1 ) {
+        imageFormat = "portrait"
+    } else {
+        imageFormat = "landscape"
+    }
+    return imageFormat;
+}
+
 function setContent(i) {
+    let imageRatio1 = calcRatio(data1[i].imageRatio);
+    image1.classList.remove('portrait', 'landscape');
+    image1.classList.add(imageRatio1);
     image1.src = `img/${data1[i].imageFilename}`;
     filename1.innerHTML = data1[i].imageFilename;
     // caption1.innerHTML = `<p>${data1[i].caption}</p>`;
     caption1.innerHTML = data1[i].caption;
     dateSource1.innerHTML = data1[i].dateSource;
 
+    let imageRatio2 = calcRatio(data2[i].imageRatio);
+    image2.classList.remove('portrait', 'landscape');
+    image2.classList.add(imageRatio2)
     image2.src = `img/${data2[i].imageFilename}`;
     filename2.innerHTML = data2[i].imageFilename;
     caption2.innerHTML = data2[i].caption;
@@ -72,7 +92,7 @@ function nextEntry(){
     } else {
         i = 0;
     }
-    console.log(i);
+    //console.log(i);
     setContent(i);
 }
 function previousEntry(){

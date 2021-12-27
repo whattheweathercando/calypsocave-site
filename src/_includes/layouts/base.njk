@@ -2,9 +2,7 @@
 <html lang="en">
 {% include "partials/head.njk" %}
 <body>
-    <main>
-		{{ content | safe }}
-	</main>
+	{{ content | safe }}
     {% expose calypsodata %}
     <script src="js/index.js"></script>
 </body>

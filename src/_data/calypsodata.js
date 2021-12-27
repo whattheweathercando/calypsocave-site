@@ -19,6 +19,7 @@ module.exports = () => {
                 id: record.get('ID'),
                 caption: record.get('caption'),
                 imageFilename: record.get('image-filename'),
+                image: record.get('image'),
                 dateSource: record.get('date-source'),
                 category: record.get('category')
               });
@@ -30,7 +31,7 @@ module.exports = () => {
               reject(err)
             } else {
               resolve(calypsoData);
-              //console.log(calypsoData);
+              console.log(calypsoData);
             }
           }
         );

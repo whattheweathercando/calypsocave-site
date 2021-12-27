@@ -1,12 +1,12 @@
 
 /* CSS Variables */
 :root {
-    --font-size-base: 20px;
+    --font-size-base: 16px;
     --font-size-small: 0.75rem;
     --font-size-large: 2rem;
     --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, Arial, "Helvetica Neue", sans-serif;
     --font-family-serif: "Times New Roman", serif;
-    --font-family-sans: Verdana, Arial, Helvetica, sans-serif;
+    --font-family-sans: Helvetica, Verdana, Arial, sans-serif;
 }
 /* @media screen and (min-width: 1280px) {
     :root {
@@ -19,8 +19,13 @@ html {
 }
 body {
     /* padding: 1rem; */
-    font-family: var(--font-family-system);
+    font-family: var(--font-family-serif);
 }
+body.darkmode {
+    color: white;
+    background-color: black;
+}
+
 footer {
     display: none;
     position: fixed;
@@ -28,26 +33,35 @@ footer {
     height: auto;
     bottom: 0;
 }
-#cave-1, #cave-2 {
-    position: absolute;
-    width: 50vw;
-    min-height: 100vh;
-    top: 0;
-}
-#cave-2 {
-    right: 0;
-}
 
+main#main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 4vw;
+    margin: 0 8vw;
+    padding-top: 1vw;
+}
+/* #cave-1, #cave-2 {
+    min-height: 100vh;
+} */
 
 .image-filename {
     display: none;
 }
 
 .image-container {
-    width: 100%;
-    height: 50vh;
+    width: 40vw;
+    height: 40vw;
+    position: relative;
+    border: 1px dotted grey;
 }
-/* .image {} */
+.image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* margin-right: -50%; */
+    transform: translate(-50%, -50%)
+}
 .landscape {
     width: 100%;
     height: auto;
@@ -55,10 +69,9 @@ footer {
 .portrait {
     height: 100%;
     width: auto;
-    max-width: 100%;
 }
 
-.caption {
+.caption, .date-source {
     padding: 1em 0;
 } 
 .date-source {
