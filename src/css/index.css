@@ -19,7 +19,7 @@ html {
 }
 body {
     /* padding: 1rem; */
-    font-family: var(--font-family-serif);
+    font-family: var(--font-family-sans);
 }
 body.darkmode {
     color: white;
@@ -39,11 +39,12 @@ main#main-grid {
     grid-template-columns: 1fr 1fr;
     grid-gap: 4vw;
     margin: 0 8vw;
-    padding-top: 1vw;
+    /* padding-top: 1vw; */
 }
-/* #cave-1, #cave-2 {
+.cave-column {
+    position: relative;
     min-height: 100vh;
-} */
+}
 
 .image-filename {
     display: none;
@@ -77,5 +78,12 @@ main#main-grid {
 .date-source {
     position: absolute;
     bottom: 0;
+    /* width: 120px; */
     font-size: var(--font-size-small);
+}
+
+.centered-h {
+    left: 50%;
+    /* margin-right: -50%; */
+    transform: translate(-50%, 0%);
 }
