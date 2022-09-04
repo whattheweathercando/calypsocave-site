@@ -6,7 +6,7 @@
     --font-size-large: 2rem;
     --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, Arial, "Helvetica Neue", sans-serif;
     --font-family-serif: "Times New Roman", serif;
-    --font-family-sans: Helvetica, Verdana, Arial, sans-serif;
+    --font-family-sans: "Lucida Grande", Verdana, Arial, sans-serif;
 }
 /* @media screen and (min-width: 1280px) {
     :root {
@@ -55,6 +55,7 @@ main#main-grid {
     height: 40vw;
     position: relative;
     border: 1px dotted grey;
+    margin-top: 1vw;
 }
 .image {
     position: absolute;
