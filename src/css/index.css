@@ -6,7 +6,7 @@
     --font-size-large: 2rem;
     --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, Arial, "Helvetica Neue", sans-serif;
     --font-family-serif: "Times New Roman", serif;
-    --font-family-sans: "Lucida Grande", Verdana, Arial, sans-serif;
+    --font-family-sans: Helvetica, "Lucida Grande", Verdana, Arial, sans-serif;
 }
 /* @media screen and (min-width: 1280px) {
     :root {
@@ -54,7 +54,7 @@ main#main-grid {
     width: 40vw;
     height: 40vw;
     position: relative;
-    border: 1px dotted grey;
+    /* border: 1px dotted grey; */
     margin-top: 1vw;
 }
 .image {
@@ -74,7 +74,7 @@ main#main-grid {
 }
 
 .caption, .date-source {
-    padding: 1em 0;
+    padding: 2em 0;
 } 
 .date-source {
     position: absolute;

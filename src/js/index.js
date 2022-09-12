@@ -1,4 +1,5 @@
-//console.log(calypsoData);
+// test access to returned array "calypsoDate" from calypsocave.js
+console.log(calypsoData);
 
 // markdown-it in browser, added to "window" on script load
 // const md = window.markdownit();
@@ -6,7 +7,6 @@ const md = window.markdownit({
     html: true,
     breaks: true,
 });
-// var result = md.render('# markdown-it rulezz!');
 
 const dataParsed = calypsoData.map(obj => {
     let rObj = {}
@@ -30,10 +30,10 @@ const dataParsed = calypsoData.map(obj => {
 // filter data cat 1 / 2 
 const data1 = dataParsed.filter(entry => entry.category == 1);
 //console.log("CALYPSO CAVE DATA 1");
-console.log(data1);
+//console.log(data1);
 const data2 = dataParsed.filter(entry => entry.category == 2);
 //console.log("CALYPSO CAVE DATA 2");
-console.log(data2);
+//console.log(data2);
 
 const filename1 = document.querySelector('#image-filename-1');
 const image1 = document.querySelector('#image-1');
@@ -101,7 +101,7 @@ function previousEntry(){
     } else {
         i = data1.length-1;
     }
-    console.log(i);
+    //console.log(i);
     setContent(i);
 }
 
