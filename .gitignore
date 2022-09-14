@@ -6,8 +6,8 @@ docs
 .env
 
 
-# Text notes / log
-*.txt 
+# Text notes / log (root dir only)
+/*.txt 
 
 # Visual Studio Code workspace #
 *.code-workspace

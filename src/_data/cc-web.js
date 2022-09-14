@@ -1,5 +1,6 @@
 // const Cache = require("@11ty/eleventy-cache-assets");
 require('dotenv').config();
+const fs = require('fs');
 
 const Airtable = require('airtable');
 
@@ -32,6 +33,17 @@ module.exports = () => {
             } else {
               resolve(calypsoDataWeb);
               console.log(calypsoDataWeb);
+              // write data to json file
+              // convert JSON object to a string
+              const data = JSON.stringify(calypsoDataWeb);
+              // write file to disk
+              fs.writeFile('src/data/cc-web.json', data, 'utf8', (err) => {
+                  if (err) {
+                      console.log(`Error writing file: ${err}`);
+                  } else {
+                      console.log(`File is written successfully!`);
+                  }
+              });
             }
           }
         );
