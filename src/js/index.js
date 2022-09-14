@@ -53,7 +53,7 @@ function calcRatio(ratio) {
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        let v = 1;
+        let v = 0;
         const data = await loadData(v);
         console.log(`Data from view "${views[v]}" loaded:`);
         console.log(data);
@@ -62,15 +62,37 @@ document.addEventListener("DOMContentLoaded", async () => {
             let rObj = {}
             // todo : better way to pass key/value pairs unchanged
             rObj.id = obj.id
-            rObj.category = obj.category
-            rObj.imageFilename = obj.imageFilename
-            // rObj.imageWidth = obj.image[0].width
-            // rObj.imageHeight = obj.image[0].height
-            // rObj.imageRatio = rObj.imageWidth / rObj.imageHeight
-            rObj.imageRatio = obj.image[0].width / obj.image[0].height
-            rObj.dateSource = obj.dateSource
-            // parse caption markdown
-            rObj.caption = md.render(`${obj.caption}`)
+            if (obj.category != undefined){
+                rObj.category = obj.category
+            } else if (obj.pagenumber != undefined) {
+                if (obj.pagenumber % 2 == 0 ){
+                    rObj.category = 1
+                } else {
+                    rObj.category = 2
+                }
+            }
+            
+            if (obj.image != undefined){
+                rObj.imageFilename = obj.imageFilename
+                // rObj.imageWidth = obj.image[0].width
+                // rObj.imageHeight = obj.image[0].height
+                // rObj.imageRatio = rObj.imageWidth / rObj.imageHeight
+                rObj.imageRatio = obj.image[0].width / obj.image[0].height
+            } else {
+                rObj.image = []
+            };
+            if (obj.dateSource != undefined){
+                rObj.dateSource = obj.dateSource
+            } else {
+                rObj.dateSource = ""
+            }
+            if (obj.caption != undefined){
+                // parse caption markdown
+                rObj.caption = md.render(`${obj.caption}`)
+            } else {
+                rObj.caption = ""
+            }
+                
             return rObj
         })
         //console.log(dataParsed);
@@ -113,7 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let i = 0;
         setContent(i);
         // to do : selector, load/set content anew
-        
+
         
         // page content navigation 
         

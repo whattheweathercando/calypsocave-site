@@ -22,7 +22,8 @@ module.exports = () => {
                 imageFilename: record.get('image-filename'),
                 image: record.get('image'),
                 dateSource: record.get('date-source'),
-                category: record.get('category')
+                category: record.get('category'),
+                pagenumber: record.get('pagenumber')
               });
             });
             fetchNextPage();
