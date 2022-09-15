@@ -7,7 +7,7 @@ let base = new Airtable({ apiKey: process.env.API_KEY }).base(process.env.BASE_I
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
-    let calypsoDataWeb = [];
+    let calypsoData = [];
       base('CC-main') 
         .select({ 
             view: 'web' 
@@ -15,7 +15,7 @@ module.exports = () => {
         .eachPage(
           function page(records, fetchNextPage) {
             records.forEach((record) => {
-              calypsoDataWeb.push({
+              calypsoData.push({
                 id: record.get('ID'),
                 caption: record.get('caption'),
                 imageFilename: record.get('image-filename'),
@@ -30,8 +30,8 @@ module.exports = () => {
             if (err) {
               reject(err)
             } else {
-              resolve(calypsoDataWeb);
-              console.log(calypsoDataWeb);
+              resolve(calypsoData);
+              console.log(calypsoData);
             }
           }
         );

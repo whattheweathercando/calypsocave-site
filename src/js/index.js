@@ -22,7 +22,7 @@ const image2 = document.querySelector('#image-2');
 const caption2 = document.querySelector('#caption-2');
 const dateSource2 = document.querySelector('#date-source-2');
 const nextButton = document.querySelector('#next-button');
-
+const sourceSelect = document.querySelector('#source-select');
 
 
 const views = [
@@ -31,13 +31,14 @@ const views = [
 ];
 
 // fetch data from json files
-async function loadData(i) {
-    const response = await fetch(`data/cc-${ views[i] }.json`);
+async function loadData(v) {
+    const response = await fetch(`data/cc-${ views[v] }.json`);
     const data = await response.json();
     //console.log(data);
     return data;
 }
 
+  
 
 function calcRatio(ratio) {
     let imageFormat = "";
@@ -53,67 +54,67 @@ function calcRatio(ratio) {
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
+        let data = []
+        let dataParsed = []
+        let data1 = []
+        let data2 = []
+        let i = 0;
         let v = 0;
-        const data = await loadData(v);
-        console.log(`Data from view "${views[v]}" loaded:`);
-        console.log(data);
 
-        const dataParsed = data.map(obj => {
-            let rObj = {}
-            // todo : better way to pass key/value pairs unchanged
-            rObj.id = obj.id
-            if (obj.category != undefined){
-                rObj.category = obj.category
-            } else if (obj.pagenumber != undefined) {
-                if (obj.pagenumber % 2 == 0 ){
-                    rObj.category = 1
+
+        
+        function parseData(){
+            dataParsed = data.map(obj => {
+                let rObj = {}
+                rObj.id = obj.id
+                if (obj.category != undefined){
+                    rObj.category = obj.category
+                } else if (obj.pagenumber != undefined) {
+                    if (obj.pagenumber % 2 == 0 ){
+                        rObj.category = 1
+                    } else {
+                        rObj.category = 2
+                    }
+                }   
+                if (obj.image != undefined){
+                    rObj.imageFilename = obj.imageFilename
+                    // rObj.imageWidth = obj.image[0].width
+                    // rObj.imageHeight = obj.image[0].height
+                    // rObj.imageRatio = rObj.imageWidth / rObj.imageHeight
+                    rObj.imageRatio = obj.image[0].width / obj.image[0].height
                 } else {
-                    rObj.category = 2
+                    rObj.image = []
                 }
-            }
-            
-            if (obj.image != undefined){
-                rObj.imageFilename = obj.imageFilename
-                // rObj.imageWidth = obj.image[0].width
-                // rObj.imageHeight = obj.image[0].height
-                // rObj.imageRatio = rObj.imageWidth / rObj.imageHeight
-                rObj.imageRatio = obj.image[0].width / obj.image[0].height
-            } else {
-                rObj.image = []
-            };
-            if (obj.dateSource != undefined){
-                rObj.dateSource = obj.dateSource
-            } else {
-                rObj.dateSource = ""
-            }
-            if (obj.caption != undefined){
-                // parse caption markdown
-                rObj.caption = md.render(`${obj.caption}`)
-            } else {
-                rObj.caption = ""
-            }
-                
-            return rObj
-        })
-        //console.log(dataParsed);
+                if (obj.dateSource != undefined){
+                    rObj.dateSource = obj.dateSource
+                } else {
+                    rObj.dateSource = ""
+                }
+                if (obj.caption != undefined){
+                    // parse caption markdown
+                    rObj.caption = md.render(`${obj.caption}`)
+                } else {
+                    rObj.caption = ""
+                }     
+                return rObj
+            })
+            //console.log(dataParsed);
+        }
         
         
+        function filterCategories(){
+            // filter data categories 1 / 2 
+            data1 = dataParsed.filter(entry => entry.category == 1);
+            //console.log("CALYPSO CAVE DATA 1");
+            //console.log(data1);
+            data2 = dataParsed.filter(entry => entry.category == 2);
+            //console.log("CALYPSO CAVE DATA 2");
+            //console.log(data2);
+            //return data1, data2;
+        }
+
         
-        // filter data categories 1 / 2 
-        const data1 = dataParsed.filter(entry => entry.category == 1);
-        //console.log("CALYPSO CAVE DATA 1");
-        //console.log(data1);
-        const data2 = dataParsed.filter(entry => entry.category == 2);
-        //console.log("CALYPSO CAVE DATA 2");
-        //console.log(data2);
-        
-        
-        
-        
-        
-        
-        
-        function setContent(i) {
+        function setHtml(i) {
             let imageRatio1 = calcRatio(data1[i].imageRatio);
             image1.classList.remove('portrait', 'landscape');
             image1.classList.add(imageRatio1);
@@ -131,13 +132,31 @@ document.addEventListener("DOMContentLoaded", async () => {
             caption2.innerHTML = data2[i].caption;
             dateSource2.innerHTML = data2[i].dateSource;
         }
-        
-        let i = 0;
-        setContent(i);
-        // to do : selector, load/set content anew
 
+        async function setContent(i,v){
+            data = await loadData(v);
+            console.log(`Data from view "${views[v]}" loaded:`);
+            console.log(data);
+            parseData();
+            filterCategories();
+            setHtml(i);
+        }
+        setContent(i,v);
+
+        // update on source select
+        //console.log(sourceSelect.value)
+        sourceSelect.addEventListener('change', async function setSource(event) {
+             // get selected VALUE
+            v = event.target.value;
+            i = 0;
+            console.log(v);
+            setContent(i,v);
+            
+        });
         
-        // page content navigation 
+
+
+        // content navigation 
         
         function nextEntry(){
             if (i < data1.length-1){
@@ -146,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 i = 0;
             }
             //console.log(i);
-            setContent(i);
+            setHtml(i);
         }
         function previousEntry(){
             if (i > 0){
@@ -155,7 +174,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 i = data1.length-1;
             }
             //console.log(i);
-            setContent(i);
+            setHtml(i);
         }
         
         nextButton.addEventListener('click', nextEntry);

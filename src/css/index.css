@@ -27,7 +27,7 @@ body.darkmode {
 }
 
 footer {
-    display: none;
+    /* display: none; */
     position: fixed;
     width: 100vw;
     height: auto;

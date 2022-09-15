@@ -37,13 +37,13 @@ module.exports = () => {
               // convert JSON object to a string
               const data = JSON.stringify(calypsoDataWeb);
               // write file to disk
-              fs.writeFile('src/data/cc-web.json', data, 'utf8', (err) => {
-                  if (err) {
-                      console.log(`Error writing file: ${err}`);
-                  } else {
-                      console.log(`File is written successfully!`);
-                  }
-              });
+              // fs.writeFile('src/data/cc-web.json', data, 'utf8', (err) => {
+              //     if (err) {
+              //         console.log(`Error writing file: ${err}`);
+              //     } else {
+              //         console.log(`File is written successfully!`);
+              //     }
+              // });
             }
           }
         );
