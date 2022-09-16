@@ -23,7 +23,8 @@ module.exports = () => {
                 image: record.get('image'),
                 dateSource: record.get('date-source'),
                 category: record.get('category'),
-                pagenumber: record.get('pagenumber')
+                pagenumber: record.get('pagenumber'),
+                tags: record.get('tags'),
               });
             });
             fetchNextPage();

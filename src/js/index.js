@@ -23,11 +23,17 @@ const caption2 = document.querySelector('#caption-2');
 const dateSource2 = document.querySelector('#date-source-2');
 const nextButton = document.querySelector('#next-button');
 const sourceSelect = document.querySelector('#source-select');
-
+const tagSelect = document.querySelector('#tag-select')
 
 const views = [
     "book",
     "web",
+];
+const tags = [
+    "alt",
+    "gov",
+    "tech",
+    "com"
 ];
 
 // fetch data from json files
@@ -60,6 +66,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let data2 = []
         let i = 0;
         let v = 0;
+        let t = "";
 
 
         
@@ -95,22 +102,29 @@ document.addEventListener("DOMContentLoaded", async () => {
                     rObj.caption = md.render(`${obj.caption}`)
                 } else {
                     rObj.caption = ""
-                }     
+                }   
+                if (obj.tags == undefined){
+                    rObj.tags = [""]
+                } else {
+                    rObj.tags = obj.tags
+                }
                 return rObj
             })
-            //console.log(dataParsed);
+            console.log("Data Parsed :");
+            console.log(dataParsed);
         }
         
         
         function filterCategories(){
             // filter data categories 1 / 2 
             data1 = dataParsed.filter(entry => entry.category == 1);
-            //console.log("CALYPSO CAVE DATA 1");
-            //console.log(data1);
+            data1All = data1; // backup for reset before filter
+            // console.log("CALYPSO CAVE DATA 1");
+            console.log(data1);
             data2 = dataParsed.filter(entry => entry.category == 2);
-            //console.log("CALYPSO CAVE DATA 2");
+            data2All = data2; 
+            // console.log("CALYPSO CAVE DATA 2");
             //console.log(data2);
-            //return data1, data2;
         }
 
         
@@ -136,12 +150,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         async function setContent(i,v){
             data = await loadData(v);
             console.log(`Data from view "${views[v]}" loaded:`);
-            console.log(data);
+            //console.log(data);
             parseData();
             filterCategories();
             setHtml(i);
         }
         setContent(i,v);
+        
 
         // update on source select
         //console.log(sourceSelect.value)
@@ -153,8 +168,27 @@ document.addEventListener("DOMContentLoaded", async () => {
             setContent(i,v);
             
         });
-        
 
+        // filter by tag
+        function filterTag(tag){
+            data1 = data1All;
+            data1 = data1.filter(entry => (entry.tags.includes(tag) == true ) );
+            console.log('Data1 filtered by tag:')
+            console.log(data1);
+            data2 = data2All;
+            data2 = data2.filter(entry => (entry.tags.includes(tag) == true ) );
+            console.log('Data2 filtered by tag:');
+            console.log(data2);  
+        }
+
+        tagSelect.addEventListener('change', async function setTag(event) {
+            // get selected VALUE
+           t = event.target.value;
+           console.log(t);
+           // re
+           filterTag(t);
+           setHtml(i);
+       });
 
         // content navigation 
         
