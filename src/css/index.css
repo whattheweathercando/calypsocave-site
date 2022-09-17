@@ -5,8 +5,12 @@
     --font-size-small: 0.75rem;
     --font-size-large: 2rem;
     --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, Arial, "Helvetica Neue", sans-serif;
-    --font-family-serif: "Times New Roman", serif;
-    --font-family-sans: "Lucida Grande", Verdana, Arial, sans-serif;
+    --font-family-sans-2: "Lucida Grande", Verdana, sans-serif;
+    --font-family-sans-1: Helvetica, Arial, sans-serif;
+    /* --column-width: 500px;
+    --column-gap: 150px; */
+    --column-width: calc(100vw / 3);
+    --column-gap: calc(100vw / 9);
 }
 /* @media screen and (min-width: 1280px) {
     :root {
@@ -19,7 +23,7 @@ html {
 }
 body {
     /* padding: 1rem; */
-    font-family: var(--font-family-sans);
+    font-family: var(--font-family-sans-1);
 }
 body.darkmode {
     color: white;
@@ -36,10 +40,10 @@ footer {
 
 main#main-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 4vw;
-    margin: 0 8vw;
-    /* padding-top: 1vw; */
+    grid-template-columns: repeat(2, var(--column-width));
+    grid-gap: var(--column-gap);
+    width: calc(2 * var(--column-width) + var(--column-gap));
+    margin: auto;
 }
 .cave-column {
     position: relative;
@@ -51,11 +55,10 @@ main#main-grid {
 }
 
 .image-container {
-    width: 40vw;
-    height: 40vw;
+    width: var(--column-width);
+    height: var(--column-width);
     position: relative;
-    /* border: 1px dotted grey; */
-    margin-top: 1vw;
+    margin-top: 2rem;
 }
 .image {
     position: absolute;
@@ -73,13 +76,13 @@ main#main-grid {
     width: auto;
 }
 
-.caption, .date-source {
+.caption {
     padding: 2em 0;
 } 
 .date-source {
     position: absolute;
     bottom: 0;
-    /* width: 120px; */
+    padding: 1em 0;
     font-size: var(--font-size-small);
 }
 

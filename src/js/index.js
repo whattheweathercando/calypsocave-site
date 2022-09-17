@@ -36,7 +36,7 @@ const tags = [
     "medium",
     "sunburn"
 ];
-// to do : get array of tags 
+
 // append options to tag select
 tags.forEach( (tag,i) => {
     console.log(i,tag);
@@ -68,7 +68,7 @@ function calcRatio(ratio) {
 
 
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
     try {
         let data = []
         let dataParsed = []
@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     rObj.imageRatio = obj.image[0].width / obj.image[0].height
                 } else {
                     rObj.image = []
+                    rObj.imageRatio = 1;
                 }
                 if (obj.dateSource != undefined){
                     rObj.dateSource = obj.dateSource
@@ -192,12 +193,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         tagSelect.addEventListener('change', async function setTag(event) {
+            i = 0;
             // get selected VALUE
-           t = event.target.value;
-           console.log(t);
-           // re
-           filterTag(t);
-           setHtml(i);
+            t = event.target.value;
+            console.log(t);
+            filterTag(t);
+            setHtml(i);
        });
 
         // content navigation 
