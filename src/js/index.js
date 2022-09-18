@@ -29,20 +29,25 @@ const tagSelect = document.querySelector('#tag-select')
 const views = [
     "book",
     "web",
+    "key",
 ];
 const tags = [
     "alternative",
     "vs",
     "medium",
-    "sunburn"
+    "sunburn",
+    "key",
+    "grafitti",
+    "ad",
+    "rainbow"
 ];
 
 // append options to tag select
 tags.forEach( (tag,i) => {
-    console.log(i,tag);
+    //console.log(i,tag);
     let opt = document.createElement('option');
     opt.value = tag;
-    opt.innerHTML = `Walk ${i+1}`;
+    opt.innerHTML = `${tag} ${i+1}`;
     tagSelect.appendChild(opt);
 });
 
@@ -175,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
              // get selected VALUE
             v = event.target.value;
             i = 0;
-            console.log(v);
+            //console.log(v);
             setContent(i,v);
             
         });
