@@ -35,11 +35,12 @@ module.exports = () => {
               reject(err)
             } else {
               resolve(calypsoDataBook);
-              console.log(calypsoDataBook);
+              // console.log('CalypsoDataBook:')
+              // console.log(calypsoDataBook);
               // write calypsoDataBook to json file
               // convert JSON object to a string
               const data = JSON.stringify(calypsoDataBook);
-              // write file to disk
+              
               // fs.writeFile(`src/data/cc-${selectedView}.json`, data, 'utf8', (err) => {
               //     if (err) {
               //         console.log(`Error writing file: ${err}`);

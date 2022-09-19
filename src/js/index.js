@@ -99,13 +99,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }   
                 if (obj.image != undefined){
-                    rObj.imageFilename = obj.imageFilename
+                    // rObj.imageFilename = obj.imageFilename
+                    rObj.imageFilename = obj.image[0].filename;
                     // rObj.imageWidth = obj.image[0].width
                     // rObj.imageHeight = obj.image[0].height
                     // rObj.imageRatio = rObj.imageWidth / rObj.imageHeight
                     rObj.imageRatio = obj.image[0].width / obj.image[0].height
                 } else {
                     rObj.image = []
+                    rObj.imageFilename = "";
                     rObj.imageRatio = 1;
                 }
                 if (obj.dateSource != undefined){
@@ -135,12 +137,12 @@ document.addEventListener("DOMContentLoaded", () => {
             // filter data categories 1 / 2 
             data1 = dataParsed.filter(entry => entry.category == 1);
             data1All = data1; // backup for reset before filter
-            //console.log("CALYPSO CAVE DATA 1");
-            //console.log(data1);
+            console.log("CALYPSO CAVE DATA 1");
+            console.log(data1);
             data2 = dataParsed.filter(entry => entry.category == 2);
             data2All = data2; 
-            //console.log("CALYPSO CAVE DATA 2");
-            //console.log(data2);
+            console.log("CALYPSO CAVE DATA 2");
+            console.log(data2);
         }
 
         

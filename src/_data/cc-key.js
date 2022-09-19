@@ -35,7 +35,7 @@ module.exports = () => {
               reject(err)
             } else {
               resolve(calypsoDataKey);
-              console.log(calypsoDataKey);
+              //console.log(calypsoDataKey);
               // write calypsoDataKey to json file
               // convert JSON object to a string
               const data = JSON.stringify(calypsoDataKey);
