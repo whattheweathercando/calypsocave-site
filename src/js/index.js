@@ -32,14 +32,17 @@ const views = [
     "key",
 ];
 const tags = [
-    "alternative",
-    "vs",
-    "medium",
-    "sunburn",
+    "-><-",
+    "? ∞ ?",
+    "#",
     "key",
-    "grafitti",
-    "ad",
-    "rainbow"
+    "$",
+    "- -",
+    "Odyssey",
+    "->",
+    "<-",
+    "[  ]",
+    "Walk"
 ];
 
 // append options to tag select
@@ -47,7 +50,7 @@ tags.forEach( (tag,i) => {
     //console.log(i,tag);
     let opt = document.createElement('option');
     opt.value = tag;
-    opt.innerHTML = `${tag} ${i+1}`;
+    opt.innerHTML = `${i} - ${tag}`;
     tagSelect.appendChild(opt);
 });
 

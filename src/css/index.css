@@ -12,18 +12,14 @@
     --column-width: calc(100vw / 3);
     --column-gap: calc(100vw / 9);
 }
-/* @media screen and (min-width: 1280px) {
-    :root {
-        --font-size-base: 2vw;
-    }
-} */
+
 
 html {
     font-size: var(--font-size-base);
 }
 body {
     /* padding: 1rem; */
-    font-family: var(--font-family-sans-1);
+    font-family: var(--font-family-system);
 }
 body.darkmode {
     color: white;
@@ -31,11 +27,17 @@ body.darkmode {
 }
 
 footer {
-    /* display: none; */
+    display: grid;
+    display: none;
+    grid-template-columns: 2fr auto;
     position: fixed;
+    bottom: 0;
     width: 100vw;
     height: auto;
-    bottom: 0;
+    padding: 1em;
+    font-size: var(--font-size-small);
+    background-color: white;
+    border-top: 1px solid black;
 }
 
 main#main-grid {
