@@ -24,7 +24,10 @@ const dateSource2 = document.querySelector('#date-source-2');
 const nextButton = document.querySelector('#next-button');
 const prevButton = document.querySelector('#prev-button');
 const sourceSelect = document.querySelector('#source-select');
-const tagSelect = document.querySelector('#tag-select')
+const tagSelect = document.querySelector('#tag-select');
+const navToggle = document.querySelector('#nav-toggle');
+const nav = document.querySelector('#nav');
+const select = document.querySelector('#select');
 
 const views = [
     "book",
@@ -232,6 +235,10 @@ document.addEventListener("DOMContentLoaded", () => {
             setHtml(i);
         }
         
+        navToggle.addEventListener('click', function(){
+            nav.classList.toggle('hidden');
+            select.classList.toggle('hidden');
+        });
         nextButton.addEventListener('click', nextEntry);
         prevButton.addEventListener('click', previousEntry);
         
