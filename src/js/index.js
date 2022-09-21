@@ -33,6 +33,7 @@ const views = [
     "book",
     "web",
     "key",
+    "screenwalk",
 ];
 const tags = [
     "-><-",
