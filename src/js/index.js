@@ -154,20 +154,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
         
         function setHtml(i) {
-            let imageRatio1 = calcRatio(data1[i].imageRatio);
-            image1.classList.remove('portrait', 'landscape');
-            image1.classList.add(imageRatio1);
-            image1.src = `img/${data1[i].imageFilename}`;
-            filename1.innerHTML = data1[i].imageFilename;
-            // caption1.innerHTML = `<p>${data1[i].caption}</p>`;
+            if (data1[i].imageFilename != ""){
+                let imageRatio1 = calcRatio(data1[i].imageRatio);
+                image1.classList.remove('portrait', 'landscape');
+                image1.classList.add(imageRatio1);
+                image1.src = `img/${data1[i].imageFilename}`;
+                filename1.innerHTML = data1[i].imageFilename;
+            }   
             caption1.innerHTML = data1[i].caption;
             dateSource1.innerHTML = data1[i].dateSource;
         
-            let imageRatio2 = calcRatio(data2[i].imageRatio);
-            image2.classList.remove('portrait', 'landscape');
-            image2.classList.add(imageRatio2)
-            image2.src = `img/${data2[i].imageFilename}`;
-            filename2.innerHTML = data2[i].imageFilename;
+            if (data2[i].imageFilename != ""){
+                let imageRatio2 = calcRatio(data2[i].imageRatio);
+                image2.classList.remove('portrait', 'landscape');
+                image2.classList.add(imageRatio2)
+                image2.src = `img/${data2[i].imageFilename}`;
+                filename2.innerHTML = data2[i].imageFilename;
+            }
+            caption2.innerHTML = data2[i].caption;
+            dateSource2.innerHTML = data2[i].dateSource;
+        }
+        function setHtml1(i){
+            if (data1[i].imageFilename != ""){
+                let imageRatio1 = calcRatio(data1[i].imageRatio);
+                image1.classList.remove('portrait', 'landscape');
+                image1.classList.add(imageRatio1);
+                image1.src = `img/${data1[i].imageFilename}`;
+                filename1.innerHTML = data1[i].imageFilename;
+            }
+            caption1.innerHTML = data1[i].caption;
+            dateSource1.innerHTML = data1[i].dateSource;
+        }
+        function setHtml2(i){
+            if (data2[i].imageFilename != ""){
+                let imageRatio2 = calcRatio(data2[i].imageRatio);
+                image2.classList.remove('portrait', 'landscape');
+                image2.classList.add(imageRatio2)
+                image2.src = `img/${data2[i].imageFilename}`;
+                filename2.innerHTML = data2[i].imageFilename;
+            }
             caption2.innerHTML = data2[i].caption;
             dateSource2.innerHTML = data2[i].dateSource;
         }
@@ -235,6 +260,38 @@ document.addEventListener("DOMContentLoaded", () => {
             //console.log(i);
             setHtml(i);
         }
+        function nextEntry1(){
+            if (i < data1.length-1){
+                i++;
+            } else {
+                i = 0;
+            }
+            setHtml1(i);
+        }
+        function previousEntry1(){
+            if (i > 0){
+                i--;
+            } else {
+                i = data1.length-1;
+            }
+            setHtml1(i);
+        }
+        function nextEntry2(){
+            if (i < data1.length-1){
+                i++;
+            } else {
+                i = 0;
+            }
+            setHtml2(i);
+        }
+        function previousEntry2(){
+            if (i > 0){
+                i--;
+            } else {
+                i = data1.length-1;
+            }
+            setHtml2(i);
+        }
         
         navToggle.addEventListener('click', function(){
             nav.classList.toggle('hidden');
@@ -245,22 +302,39 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // arrow key presses
         document.addEventListener('keydown', function(e) {
-            switch (e.keyCode) {
-                case 37:
-                    //console.log('left');
-                    previousEntry();
-                    break;
-                case 38:
-                    //console.log('up');
-                    break;
-                case 39:
-                    //console.log('right');
-                    nextEntry();
-                    break;
-                case 40:
-                    //console.log('down');
-                    break;
+
+            if (e.shiftKey){
+                switch (e.keyCode) {
+                    case 37:
+                        //console.log('left');
+                        previousEntry1();
+                        break;
+                    case 39:
+                        //console.log('right');
+                        nextEntry1();
+                        break;
+                    case 38:
+                        //console.log('up');
+                        previousEntry2();
+                        break;
+                    case 40:
+                        //console.log('down');
+                        nextEntry2();
+                        break;
+                }
+            } else {
+                switch (e.keyCode) {
+                    case 37:
+                        //console.log('left');
+                        previousEntry();
+                        break;
+                    case 39:
+                        //console.log('right');
+                        nextEntry();
+                        break;
+                }
             }
+
         });
 
     }

@@ -61,9 +61,9 @@ module.exports = () => {
             } else {
               resolve(calypsoDataWeb);
               //console.log(calypsoDataWeb);
-              // write data to json file
-              // convert JSON object to a string
-              const data = JSON.stringify(calypsoDataWeb);   
+              
+              // // write data to json file
+              // const data = JSON.stringify(calypsoDataWeb);   
               // fs.writeFile(`src/data/cc-${selectedView}.json`, data, 'utf8', (err) => {
               //     if (err) {
               //         console.log(`Error writing file: ${err}`);
@@ -72,7 +72,7 @@ module.exports = () => {
               //     }
               // });
 
-              // 11ty fetch/cache images here
+              // // 11ty fetch/cache images here
               // calypsoDataWeb.forEach(entry => {
               //   if (entry.image != undefined){
               //     let url = entry.image[0].url;
