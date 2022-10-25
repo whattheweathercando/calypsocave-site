@@ -16,6 +16,7 @@ module.exports = function (eleventyConfig) {
     
     // Layout alias
     eleventyConfig.addLayoutAlias('base', 'layouts/base.njk');
+    eleventyConfig.addLayoutAlias('loop', 'layouts/loop.njk');
 
     // https://www.seanmcp.com/articles/send-data-to-the-window-with-eleventy/
     // eleventyConfig.addShortcode("expose", data => {
