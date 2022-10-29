@@ -6,9 +6,7 @@ module.exports = function (eleventyConfig) {
     // defaults to true in 1.0, use false to opt-out
     // eleventyConfig.setDataDeepMerge(true);
 
-    
-    // Copy `css/` to `dist/img`
-    // passthrough file copy paths are relative to the project root
+    // passthrough file copy paths relative to the project root
     eleventyConfig.addPassthroughCopy("src/css");
     eleventyConfig.addPassthroughCopy("src/js");
     eleventyConfig.addPassthroughCopy("src/img");
@@ -17,6 +15,11 @@ module.exports = function (eleventyConfig) {
     // Layout alias
     eleventyConfig.addLayoutAlias('base', 'layouts/base.njk');
     eleventyConfig.addLayoutAlias('loop', 'layouts/loop.njk');
+    eleventyConfig.addLayoutAlias('blur', 'layouts/blur.njk');
+
+
+    // Date filter, dayjs
+    eleventyConfig.addNunjucksFilter('date', require('./src/filters/nunjucks-dayjs-filter'))
 
     // https://www.seanmcp.com/articles/send-data-to-the-window-with-eleventy/
     // eleventyConfig.addShortcode("expose", data => {

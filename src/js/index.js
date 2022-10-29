@@ -34,6 +34,7 @@ const views = [
     "web",
     "key",
     "screenwalk",
+    'blur',
 ];
 const tags = [
     "-><-",
@@ -60,7 +61,7 @@ tags.forEach( (tag,i) => {
 
 // fetch data from json files
 async function loadData(v) {
-    const response = await fetch(`data/cc-${ views[v] }.json`);
+    const response = await fetch(`/data/cc-${ views[v] }.json`);
     const data = await response.json();
     //console.log(data);
     return data;
@@ -158,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let imageRatio1 = calcRatio(data1[i].imageRatio);
                 image1.classList.remove('portrait', 'landscape');
                 image1.classList.add(imageRatio1);
-                image1.src = `img/${data1[i].imageFilename}`;
+                image1.src = `/img/${data1[i].imageFilename}`;
                 filename1.innerHTML = data1[i].imageFilename;
             }   
             caption1.innerHTML = data1[i].caption;
@@ -168,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let imageRatio2 = calcRatio(data2[i].imageRatio);
                 image2.classList.remove('portrait', 'landscape');
                 image2.classList.add(imageRatio2)
-                image2.src = `img/${data2[i].imageFilename}`;
+                image2.src = `/img/${data2[i].imageFilename}`;
                 filename2.innerHTML = data2[i].imageFilename;
             }
             caption2.innerHTML = data2[i].caption;
@@ -179,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let imageRatio1 = calcRatio(data1[i].imageRatio);
                 image1.classList.remove('portrait', 'landscape');
                 image1.classList.add(imageRatio1);
-                image1.src = `img/${data1[i].imageFilename}`;
+                image1.src = `/img/${data1[i].imageFilename}`;
                 filename1.innerHTML = data1[i].imageFilename;
             }
             caption1.innerHTML = data1[i].caption;
@@ -190,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let imageRatio2 = calcRatio(data2[i].imageRatio);
                 image2.classList.remove('portrait', 'landscape');
                 image2.classList.add(imageRatio2)
-                image2.src = `img/${data2[i].imageFilename}`;
+                image2.src = `/img/${data2[i].imageFilename}`;
                 filename2.innerHTML = data2[i].imageFilename;
             }
             caption2.innerHTML = data2[i].caption;

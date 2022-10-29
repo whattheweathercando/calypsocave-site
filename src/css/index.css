@@ -17,7 +17,7 @@ html {
 }
 body {
     /* padding: 1rem; */
-    font-family: var(--font-family-sans-2);
+    font-family: var(--font-family-system);
 }
 body.darkmode {
     color: white;

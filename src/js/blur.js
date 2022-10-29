@@ -1,6 +1,4 @@
-// test access "calypsoData" sent to window from eleventy.js via "expose" shortcode
-// console.log(calypsoData);
-// let data = calypsoData;
+
 
 
 
@@ -14,12 +12,10 @@ const md = window.markdownit({
 
 // html elements
 const filename1 = document.querySelector('#image-filename-1');
-const cave1 = document.querySelector('#cave-1');
 const image1 = document.querySelector('#image-1');
 const caption1 = document.querySelector('#caption-1');
 const dateSource1 = document.querySelector('#date-source-1');
 const filename2 = document.querySelector('#image-filename-2');
-const cave2 = document.querySelector('#cave-2');
 const image2 = document.querySelector('#image-2');
 const caption2 = document.querySelector('#caption-2');
 const dateSource2 = document.querySelector('#date-source-2');
@@ -36,6 +32,7 @@ const views = [
     "web",
     "key",
     "screenwalk",
+    'blur',
 ];
 const tags = [
     "-><-",
@@ -51,14 +48,14 @@ const tags = [
     "Walk"
 ];
 
-// append options to tag select
-tags.forEach( (tag,i) => {
-    //console.log(i,tag);
-    let opt = document.createElement('option');
-    opt.value = tag;
-    opt.innerHTML = `${i} - ${tag}`;
-    tagSelect.appendChild(opt);
-});
+// // append options to tag select
+// tags.forEach( (tag,i) => {
+//     //console.log(i,tag);
+//     let opt = document.createElement('option');
+//     opt.value = tag;
+//     opt.innerHTML = `${i} - ${tag}`;
+//     tagSelect.appendChild(opt);
+// });
 
 // fetch data from json files
 async function loadData(v) {
@@ -89,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let data1 = []
         let data2 = []
         let i = 0;
-        let v = 0;
+        let v = 4;
         let t = "";
 
 
@@ -124,6 +121,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     rObj.dateSource = ""
                 }
+                if (obj.dateString2 != undefined){
+                    rObj.dateString2 = obj.dateString2
+                } else {
+                    rObj.dateString2 = ""
+                }
+                if (obj.sourceString2 != undefined){
+                    rObj.sourceString2 = obj.sourceString2
+                } else {
+                    rObj.sourceString2 = ""
+                }
                 if (obj.caption != undefined){
                     // parse caption markdown
                     rObj.caption = md.render(`${obj.caption}`)
@@ -154,37 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(data2);
         }
 
-        function setHtmlX(i) {
-            let cat = dataParsed[i].category;
-
-            if (cat == 1){
-                if (dataParsed[i].imageFilename != ""){
-                    image1.src = `/img/${dataParsed[i].imageFilename}`;
-                    filename1.innerHTML = dataParsed[i].imageFilename;
-                    let imageRatio1 = calcRatio(dataParsed[i].imageRatio);
-                    image1.classList.remove('portrait', 'landscape');
-                    image1.classList.add(imageRatio1);
-                } 
-                caption1.innerHTML = dataParsed[i].caption;
-                dateSource1.innerHTML = dataParsed[i].dateSource;
-                cave2.classList.add('invisible');
-                cave1.classList.remove('invisible');
-            } else if (cat == 2){
-                if (dataParsed[i].imageFilename != ""){
-                    image2.src = `/img/${dataParsed[i].imageFilename}`;
-                    filename2.innerHTML = dataParsed[i].imageFilename;
-                    let imageRatio2 = calcRatio(dataParsed[i].imageRatio);
-                    image2.classList.remove('portrait', 'landscape');
-                    image2.classList.add(imageRatio2);
-                }
-                caption2.innerHTML = dataParsed[i].caption;
-                dateSource2.innerHTML = dataParsed[i].dateSource;
-                cave1.classList.add('invisible');
-                cave2.classList.remove('invisible');
-            }
-        }
-     
-
+        
         function setHtml(i) {
             if (data1[i].imageFilename != ""){
                 let imageRatio1 = calcRatio(data1[i].imageRatio);
@@ -194,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 filename1.innerHTML = data1[i].imageFilename;
             }   
             caption1.innerHTML = data1[i].caption;
-            dateSource1.innerHTML = data1[i].dateSource;
+            dateSource1.innerHTML = `${data1[i].sourceString2}, posted on ${data1[i].dateString2}`;
         
             if (data2[i].imageFilename != ""){
                 let imageRatio2 = calcRatio(data2[i].imageRatio);
@@ -204,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 filename2.innerHTML = data2[i].imageFilename;
             }
             caption2.innerHTML = data2[i].caption;
-            dateSource2.innerHTML = data2[i].dateSource;
+            dateSource2.innerHTML = `${data2[i].sourceString2}, posted on ${data2[i].dateString2}`;
         }
         function setHtml1(i){
             if (data1[i].imageFilename != ""){
@@ -281,8 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 i = 0;
             }
             //console.log(i);
-            // setHtml(i);
-            setHtmlX(i);
+            setHtml(i);
         }
         function previousEntry(){
             if (i > 0){
@@ -291,8 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 i = data1.length-1;
             }
             //console.log(i);
-            // setHtml(i);
-            setHtmlX(i);
+            setHtml(i);
         }
         function nextEntry1(){
             if (i < data1.length-1){
@@ -327,12 +302,12 @@ document.addEventListener("DOMContentLoaded", () => {
             setHtml2(i);
         }
         
-        navToggle.addEventListener('click', function(){
-            nav.classList.toggle('hidden');
-            select.classList.toggle('hidden');
-        });
-        nextButton.addEventListener('click', nextEntry);
-        prevButton.addEventListener('click', previousEntry);
+        // navToggle.addEventListener('click', function(){
+        //     nav.classList.toggle('hidden');
+        //     select.classList.toggle('hidden');
+        // });
+        // nextButton.addEventListener('click', nextEntry);
+        // prevButton.addEventListener('click', previousEntry);
         
         // arrow key presses
         document.addEventListener('keydown', function(e) {
