@@ -23,6 +23,8 @@ const caption2 = document.querySelector('#caption-2');
 const dateSource2 = document.querySelector('#date-source-2');
 const icon2 = document.querySelector('#icon-2');
 
+const videoContainer = document.querySelector('.video-container');
+
 const nextButton = document.querySelector('#next-button');
 const prevButton = document.querySelector('#prev-button');
 const sourceSelect = document.querySelector('#source-select');
@@ -180,7 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     // dateSourceString1 = `${data1[i].sourceStringFull} post from ${data1[i].dateString2}`;
                     dateSourceString1 = `${data1[i].dateString2}`;
                     let iconPath1 = `/img/_icons/${data1[i].sourceStringFull.toLowerCase()}.png`;
-                    console.log(iconPath1)
                     icon1.src = iconPath1;
                 } else {
                     dateSourceString1 = "";
@@ -201,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     dateSourceString2 = `${data2[i].sourceStringFull} post from ${data2[i].dateString2}`;
                     // dateSourceString2 = `${data2[i].dateString2}`;
                     let iconPath2 = `/img/_icons/${data2[i].sourceStringFull.toLowerCase()}.png`;
-                    console.log(iconPath2)
                     icon2.src = iconPath2;
                 } else {
                     dateSourceString2 = "";
@@ -276,9 +276,36 @@ document.addEventListener("DOMContentLoaded", () => {
             setHtml(i);
         }
         
+        
+          
+        // autoplay
+        let intervalID
+        function startAutoplay(interval){
+            intervalID = setInterval(nextEntry, interval);
+        }
+        function stopAutoplay(){
+            clearInterval(intervalID);
+        }
+
+        // hide video after video lengh, 49 s, 49000 ms, then start autoplay
+        function hideVideo(){
+            videoContainer.classList.add('hidden');
+        }
+        setTimeout(() => {
+            hideVideo();
+            startAutoplay(6000);
+          }, 50000);
+        
+
         // next on click
-        cave1.addEventListener('click', (event) => nextEntry());
-        cave2.addEventListener('click', (event) => nextEntry());
+        cave1.addEventListener('click', (event) => {
+            stopAutoplay();
+            nextEntry()
+        });
+        cave2.addEventListener('click', (event) => {
+            stopAutoplay();
+            nextEntry();
+        });
         
         // arrow key presses
         document.addEventListener('keydown', function(e) {

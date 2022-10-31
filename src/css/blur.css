@@ -51,6 +51,7 @@ button, select {
     width: calc(2 * var(--column-width) + var(--column-gap));
     margin: auto;
     background-color: transparent;
+    z-index: 1;
 }
 .cave-column {
     position: relative;
@@ -60,7 +61,7 @@ button, select {
     align-self: start;
     border-radius: 1rem;
     box-shadow: 0.15rem 0.15rem 2rem black;
-    cursor: pointer;
+    cursor: e-resize;
 }
 .cave-column:hover {
     box-shadow: 0.25rem 0.25rem 2rem black;
@@ -152,10 +153,21 @@ a {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
+    z-index: 0;
 }
 .bg-img {
     height: 100vh;
     /* width: auto; */
     object-fit: cover;
+}
+
+.video-container {
+    position: relative;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    padding:62.5% 0 0 0;
+    z-index: 2;
+    border-radius: 1rem;
+    background-color: white;
 }
