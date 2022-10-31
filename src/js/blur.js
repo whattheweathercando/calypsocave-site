@@ -11,14 +11,18 @@ const md = window.markdownit({
 
 
 // html elements
-const filename1 = document.querySelector('#image-filename-1');
+const cave1 = document.querySelector('#cave-1');
 const image1 = document.querySelector('#image-1');
 const caption1 = document.querySelector('#caption-1');
 const dateSource1 = document.querySelector('#date-source-1');
-const filename2 = document.querySelector('#image-filename-2');
+const icon1 = document.querySelector('#icon-1');
+
+const cave2 = document.querySelector('#cave-2');
 const image2 = document.querySelector('#image-2');
 const caption2 = document.querySelector('#caption-2');
 const dateSource2 = document.querySelector('#date-source-2');
+const icon2 = document.querySelector('#icon-2');
+
 const nextButton = document.querySelector('#next-button');
 const prevButton = document.querySelector('#prev-button');
 const sourceSelect = document.querySelector('#source-select');
@@ -34,19 +38,19 @@ const views = [
     "screenwalk",
     'blur',
 ];
-const tags = [
-    "-><-",
-    "? ∞ ?",
-    "#",
-    "key",
-    "$",
-    "- -",
-    "Odyssey",
-    "->",
-    "<-",
-    "[  ]",
-    "Walk"
-];
+// const tags = [
+//     "-><-",
+//     "? ∞ ?",
+//     "#",
+//     "key",
+//     "$",
+//     "- -",
+//     "Odyssey",
+//     "->",
+//     "<-",
+//     "[  ]",
+//     "Walk"
+// ];
 
 // // append options to tag select
 // tags.forEach( (tag,i) => {
@@ -126,10 +130,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     rObj.dateString2 = ""
                 }
-                if (obj.sourceString2 != undefined){
-                    rObj.sourceString2 = obj.sourceString2
+                if (obj.sourceStringFull != undefined){
+                    rObj.sourceStringFull = obj.sourceStringFull
                 } else {
-                    rObj.sourceString2 = ""
+                    rObj.sourceStringFull = ""
                 }
                 if (obj.caption != undefined){
                     // parse caption markdown
@@ -163,49 +167,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
         
         function setHtml(i) {
-            if (data1[i].imageFilename != ""){
-                let imageRatio1 = calcRatio(data1[i].imageRatio);
-                image1.classList.remove('portrait', 'landscape');
-                image1.classList.add(imageRatio1);
-                image1.src = `/img/${data1[i].imageFilename}`;
-                filename1.innerHTML = data1[i].imageFilename;
-            }   
-            caption1.innerHTML = data1[i].caption;
-            dateSource1.innerHTML = `${data1[i].sourceString2}, posted on ${data1[i].dateString2}`;
-        
-            if (data2[i].imageFilename != ""){
-                let imageRatio2 = calcRatio(data2[i].imageRatio);
-                image2.classList.remove('portrait', 'landscape');
-                image2.classList.add(imageRatio2)
-                image2.src = `/img/${data2[i].imageFilename}`;
-                filename2.innerHTML = data2[i].imageFilename;
+            if (data1[i].id != "placeholder"){
+                if (data1[i].imageFilename !== "" | data1[i].id == "empty-page"){
+                    let imageRatio1 = calcRatio(data1[i].imageRatio);
+                    image1.classList.remove('portrait', 'landscape');
+                    image1.classList.add(imageRatio1);
+                    image1.src = `/img/${data1[i].imageFilename}`;
+                }   
+                caption1.innerHTML = data1[i].caption;
+                let dateSourceString1;
+                if (data1[i].sourceStringFull !== "" ){
+                    // dateSourceString1 = `${data1[i].sourceStringFull} post from ${data1[i].dateString2}`;
+                    dateSourceString1 = `${data1[i].dateString2}`;
+                    let iconPath1 = `/img/_icons/${data1[i].sourceStringFull.toLowerCase()}.png`;
+                    console.log(iconPath1)
+                    icon1.src = iconPath1;
+                } else {
+                    dateSourceString1 = "";
+                }
+                dateSource1.innerHTML = dateSourceString1;
             }
-            caption2.innerHTML = data2[i].caption;
-            dateSource2.innerHTML = `${data2[i].sourceString2}, posted on ${data2[i].dateString2}`;
-        }
-        function setHtml1(i){
-            if (data1[i].imageFilename != ""){
-                let imageRatio1 = calcRatio(data1[i].imageRatio);
-                image1.classList.remove('portrait', 'landscape');
-                image1.classList.add(imageRatio1);
-                image1.src = `/img/${data1[i].imageFilename}`;
-                filename1.innerHTML = data1[i].imageFilename;
+            
+            if (data2[i].id != "placeholder"){
+                if (data2[i].imageFilename != "" | data2[i].id == "empty-page"){
+                    let imageRatio2 = calcRatio(data2[i].imageRatio);
+                    image2.classList.remove('portrait', 'landscape');
+                    image2.classList.add(imageRatio2)
+                    image2.src = `/img/${data2[i].imageFilename}`;
+                }
+                caption2.innerHTML = data2[i].caption;
+                let dateSourceString2;
+                if (data2[i].sourceStringFull !== ""){
+                    dateSourceString2 = `${data2[i].sourceStringFull} post from ${data2[i].dateString2}`;
+                    // dateSourceString2 = `${data2[i].dateString2}`;
+                    let iconPath2 = `/img/_icons/${data2[i].sourceStringFull.toLowerCase()}.png`;
+                    console.log(iconPath2)
+                    icon2.src = iconPath2;
+                } else {
+                    dateSourceString2 = "";
+                }
+                dateSource2.innerHTML = dateSourceString2;
             }
-            caption1.innerHTML = data1[i].caption;
-            dateSource1.innerHTML = data1[i].dateSource;
-        }
-        function setHtml2(i){
-            if (data2[i].imageFilename != ""){
-                let imageRatio2 = calcRatio(data2[i].imageRatio);
-                image2.classList.remove('portrait', 'landscape');
-                image2.classList.add(imageRatio2)
-                image2.src = `/img/${data2[i].imageFilename}`;
-                filename2.innerHTML = data2[i].imageFilename;
-            }
-            caption2.innerHTML = data2[i].caption;
-            dateSource2.innerHTML = data2[i].dateSource;
+            
         }
 
+        
         async function setContent(i,v){
             data = await loadData(v);
             //console.log(`Data from view "${views[v]}" loaded:`);
@@ -217,37 +223,37 @@ document.addEventListener("DOMContentLoaded", () => {
         setContent(i,v);
         
 
-        // update on source select
-        //console.log(sourceSelect.value)
-        sourceSelect.addEventListener('change', async function setSource(event) {
-             // get selected VALUE
-            v = event.target.value;
-            i = 0;
-            //console.log(v);
-            setContent(i,v);
+        // // update on source select
+        // //console.log(sourceSelect.value)
+        // sourceSelect.addEventListener('change', async function setSource(event) {
+        //      // get selected VALUE
+        //     v = event.target.value;
+        //     i = 0;
+        //     //console.log(v);
+        //     setContent(i,v);
             
-        });
+        // });
 
-        // filter by tag
-        function filterTag(tag){
-            data1 = data1All;
-            data1 = data1.filter(entry => (entry.tags.includes(tag) == true ) );
-            console.log(`Data1 filtered by tag "${tag}":`)
-            console.log(data1);
-            data2 = data2All;
-            data2 = data2.filter(entry => (entry.tags.includes(tag) == true ) );
-            console.log(`Data2 filtered by tag "${tag}":`);
-            console.log(data2);  
-        }
+    //     // filter by tag
+    //     function filterTag(tag){
+    //         data1 = data1All;
+    //         data1 = data1.filter(entry => (entry.tags.includes(tag) == true ) );
+    //         console.log(`Data1 filtered by tag "${tag}":`)
+    //         console.log(data1);
+    //         data2 = data2All;
+    //         data2 = data2.filter(entry => (entry.tags.includes(tag) == true ) );
+    //         console.log(`Data2 filtered by tag "${tag}":`);
+    //         console.log(data2);  
+    //     }
 
-        tagSelect.addEventListener('change', async function setTag(event) {
-            i = 0;
-            // get selected VALUE
-            t = event.target.value;
-            console.log(t);
-            filterTag(t);
-            setHtml(i);
-       });
+    //     tagSelect.addEventListener('change', async function setTag(event) {
+    //         i = 0;
+    //         // get selected VALUE
+    //         t = event.target.value;
+    //         console.log(t);
+    //         filterTag(t);
+    //         setHtml(i);
+    //    });
 
         // content navigation 
         
@@ -269,81 +275,23 @@ document.addEventListener("DOMContentLoaded", () => {
             //console.log(i);
             setHtml(i);
         }
-        function nextEntry1(){
-            if (i < data1.length-1){
-                i++;
-            } else {
-                i = 0;
-            }
-            setHtml1(i);
-        }
-        function previousEntry1(){
-            if (i > 0){
-                i--;
-            } else {
-                i = data1.length-1;
-            }
-            setHtml1(i);
-        }
-        function nextEntry2(){
-            if (i < data1.length-1){
-                i++;
-            } else {
-                i = 0;
-            }
-            setHtml2(i);
-        }
-        function previousEntry2(){
-            if (i > 0){
-                i--;
-            } else {
-                i = data1.length-1;
-            }
-            setHtml2(i);
-        }
         
-        // navToggle.addEventListener('click', function(){
-        //     nav.classList.toggle('hidden');
-        //     select.classList.toggle('hidden');
-        // });
-        // nextButton.addEventListener('click', nextEntry);
-        // prevButton.addEventListener('click', previousEntry);
+        // next on click
+        cave1.addEventListener('click', (event) => nextEntry());
+        cave2.addEventListener('click', (event) => nextEntry());
         
         // arrow key presses
         document.addEventListener('keydown', function(e) {
-
-            if (e.shiftKey){
-                switch (e.keyCode) {
-                    case 37:
-                        //console.log('left');
-                        previousEntry1();
-                        break;
-                    case 39:
-                        //console.log('right');
-                        nextEntry1();
-                        break;
-                    case 38:
-                        //console.log('up');
-                        previousEntry2();
-                        break;
-                    case 40:
-                        //console.log('down');
-                        nextEntry2();
-                        break;
-                }
-            } else {
-                switch (e.keyCode) {
-                    case 37:
-                        //console.log('left');
-                        previousEntry();
-                        break;
-                    case 39:
-                        //console.log('right');
-                        nextEntry();
-                        break;
-                }
+            switch (e.keyCode) {
+                case 37:
+                    //console.log('left');
+                    previousEntry();
+                    break;
+                case 39:
+                    //console.log('right');
+                    nextEntry();
+                    break;
             }
-
         });
 
     }

@@ -25,7 +25,7 @@ module.exports = () => {
                 image: record.get('image'),
                 dateString: record.get('date-string'),
                 sourceString: record.get('source-string'),
-                sourceString2: record.get('source-name'),
+                sourceStringFull: record.get('source-name'),
                 dateSource: record.get('date-source'),
                 category: record.get('category'),
                 pagenumber: record.get('pagenumber'),

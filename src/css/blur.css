@@ -1,13 +1,13 @@
 
 :root {
-    --font-size-base: 18px;
+    --font-size-base: 16px;
     --font-size-small: 0.75rem;
     --font-size-large: 2rem;
     --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, Arial, "Helvetica Neue", sans-serif;
     --font-family-sans-2: "Lucida Grande", Verdana, sans-serif;
     --font-family-sans-1: Helvetica, Arial, sans-serif;
     --font-family-mono: "Fira Code", monospace;
-    --column-width: calc(100vw / 2.75);
+    --column-width: calc(100vw / 3);
     --column-gap: calc( (100vw - (2 * var(--column-width))) / 3);
 }
 
@@ -54,7 +54,22 @@ button, select {
 }
 .cave-column {
     position: relative;
-    min-height: 100vh;
+    background-color: white;
+    padding: 1rem;
+    /* margin-bottom: auto; */
+    align-self: start;
+    border-radius: 1rem;
+    box-shadow: 0.15rem 0.15rem 2rem black;
+    cursor: pointer;
+}
+.cave-column:hover {
+    box-shadow: 0.25rem 0.25rem 2rem black;
+}
+#cave-1 {
+    margin-top: 4rem;
+}
+#cave-2 {
+    margin-top: 1rem;
 }
 
 .image-filename {
@@ -62,10 +77,9 @@ button, select {
 }
 
 .image-container {
-    width: var(--column-width);
-    height: var(--column-width);
+    width: calc(var(--column-width) - 2rem);
+    height: calc(var(--column-width) - 2rem);
     position: relative;
-    margin-top: 2rem;
 }
 .image {
     position: absolute;
@@ -84,22 +98,37 @@ button, select {
 }
 
 .caption {
-    padding: 2em 0;
+    padding: 0 0 1rem 0;
 }
 #caption-1 {
     padding-right: 1em;
 }
+
+.info-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: stretch;
+    padding: 1em 0;
+}
+.icon-container {
+    position: relative;
+}
+.icon {
+    position: absolute;
+    right: 0;
+    height: 1.25rem;
+    width: auto;
+    padding-right: 0.25rem;
+}
 .date-source {
     position: absolute;
     bottom: 0;
-    padding: 1em 0;
     font-size: var(--font-size-small);
 }
 .date-source-blur {
     position: relative;
-    padding: 1em 0;
-    font-size: var(--font-size-small);
     color: gray;
+    font-size: var(--font-size-small);
 }
 
 .centered-h {
@@ -124,4 +153,9 @@ a {
     width: 100vw;
     height: 100vh;
     z-index: -1;
+}
+.bg-img {
+    height: 100vh;
+    /* width: auto; */
+    object-fit: cover;
 }
