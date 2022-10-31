@@ -107,7 +107,7 @@ button, select {
 
 .info-container {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 2rem auto;
     align-items: stretch;
     padding: 1em 0;
 }
@@ -116,10 +116,10 @@ button, select {
 }
 .icon {
     position: absolute;
-    right: 0;
-    height: 1.25rem;
-    width: auto;
-    padding-right: 0.25rem;
+    left: 0;
+    height: auto;
+    width: 1.5rem;
+    /* padding: 0 0 0 0.25rem; */
 }
 .date-source {
     position: absolute;
@@ -129,7 +129,7 @@ button, select {
 .date-source-blur {
     position: relative;
     color: gray;
-    font-size: var(--font-size-small);
+    /* font-size: var(--font-size-small); */
 }
 
 .centered-h {
@@ -137,7 +137,11 @@ button, select {
     /* margin-right: -50%; */
     transform: translate(-50%, 0%);
 }
-
+.centered-v {
+    top: 50%;
+    /* margin-right: -50%; */
+    transform: translate(0%, -50%);
+}
 
 
 
@@ -162,6 +166,7 @@ a {
 }
 
 .video-container {
+    /* display: none; */
     position: relative;
     position: absolute;
     width: 100vw;
@@ -170,4 +175,13 @@ a {
     z-index: 2;
     border-radius: 1rem;
     background-color: white;
+}
+
+.popup {
+    position: absolute;
+    bottom: 0;
+    height: 2em;
+    font-size: var(--font-size-small);
+    color: white;
+    background-color: transparent;
 }

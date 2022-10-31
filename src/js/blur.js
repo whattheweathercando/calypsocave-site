@@ -179,8 +179,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 caption1.innerHTML = data1[i].caption;
                 let dateSourceString1;
                 if (data1[i].sourceStringFull !== "" ){
-                    // dateSourceString1 = `${data1[i].sourceStringFull} post from ${data1[i].dateString2}`;
-                    dateSourceString1 = `${data1[i].dateString2}`;
+                    dateSourceString1 = `posted on ${data1[i].dateString2}`;
+                    // dateSourceString1 = `${data1[i].dateString2}`;
                     let iconPath1 = `/img/_icons/${data1[i].sourceStringFull.toLowerCase()}.png`;
                     icon1.src = iconPath1;
                 } else {
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 caption2.innerHTML = data2[i].caption;
                 let dateSourceString2;
                 if (data2[i].sourceStringFull !== ""){
-                    dateSourceString2 = `${data2[i].sourceStringFull} post from ${data2[i].dateString2}`;
+                    dateSourceString2 = `posted on ${data2[i].dateString2}`;
                     // dateSourceString2 = `${data2[i].dateString2}`;
                     let iconPath2 = `/img/_icons/${data2[i].sourceStringFull.toLowerCase()}.png`;
                     icon2.src = iconPath2;
@@ -207,8 +207,51 @@ document.addEventListener("DOMContentLoaded", () => {
                     dateSourceString2 = "";
                 }
                 dateSource2.innerHTML = dateSourceString2;
+            } 
+        }
+
+
+        function setHtml1(i) {
+            if (data1[i].id != "placeholder"){
+                if (data1[i].imageFilename !== "" | data1[i].id == "empty-page"){
+                    let imageRatio1 = calcRatio(data1[i].imageRatio);
+                    image1.classList.remove('portrait', 'landscape');
+                    image1.classList.add(imageRatio1);
+                    image1.src = `/img/${data1[i].imageFilename}`;
+                }   
+                caption1.innerHTML = data1[i].caption;
+                let dateSourceString1;
+                if (data1[i].sourceStringFull !== "" ){
+                    dateSourceString1 = `posted on ${data1[i].dateString2}`;
+                    // dateSourceString1 = `${data1[i].dateString2}`;
+                    let iconPath1 = `/img/_icons/${data1[i].sourceStringFull.toLowerCase()}.png`;
+                    icon1.src = iconPath1;
+                } else {
+                    dateSourceString1 = "";
+                }
+                dateSource1.innerHTML = dateSourceString1;
             }
-            
+        }
+        function setHtml2(i) {
+            if (data2[i].id != "placeholder"){
+                if (data2[i].imageFilename != "" | data2[i].id == "empty-page"){
+                    let imageRatio2 = calcRatio(data2[i].imageRatio);
+                    image2.classList.remove('portrait', 'landscape');
+                    image2.classList.add(imageRatio2)
+                    image2.src = `/img/${data2[i].imageFilename}`;
+                }
+                caption2.innerHTML = data2[i].caption;
+                let dateSourceString2;
+                if (data2[i].sourceStringFull !== ""){
+                    dateSourceString2 = `posted on ${data2[i].dateString2}`;
+                    // dateSourceString2 = `${data2[i].dateString2}`;
+                    let iconPath2 = `/img/_icons/${data2[i].sourceStringFull.toLowerCase()}.png`;
+                    icon2.src = iconPath2;
+                } else {
+                    dateSourceString2 = "";
+                }
+                dateSource2.innerHTML = dateSourceString2;
+            } 
         }
 
         
@@ -276,6 +319,31 @@ document.addEventListener("DOMContentLoaded", () => {
             setHtml(i);
         }
         
+        function nextEntryUncoupled(cat){
+            if (i < data1.length-1){
+                i++;
+            } else {
+                i = 0;
+            }
+            if (cat == 1){
+                setHtml1(i);
+            } else if (cat == 2){
+                setHtml2(i);
+            }
+        }
+        function previousEntryUncoupled(cat){
+            if (i > 0){
+                i--;
+            } else {
+                i = data1.length-1;
+            }
+            if (cat == 1){
+                setHtml1(i);
+            } else if (cat == 2){
+                setHtml2(i);
+            }
+            
+        }
         
           
         // autoplay
@@ -287,14 +355,18 @@ document.addEventListener("DOMContentLoaded", () => {
             clearInterval(intervalID);
         }
 
-        // hide video after video lengh, 49 s, 49000 ms, then start autoplay
         function hideVideo(){
             videoContainer.classList.add('hidden');
         }
-        setTimeout(() => {
+        // hide and autoplay after vimeo player ended event
+        var iframe = document.querySelector('iframe');
+        var player = new Vimeo.Player(iframe);
+        player.on('ended', function() {
+            console.log('Video ended');
             hideVideo();
             startAutoplay(6000);
-          }, 50000);
+        });
+
         
 
         // next on click
@@ -309,15 +381,38 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // arrow key presses
         document.addEventListener('keydown', function(e) {
-            switch (e.keyCode) {
-                case 37:
-                    //console.log('left');
-                    previousEntry();
-                    break;
-                case 39:
-                    //console.log('right');
-                    nextEntry();
-                    break;
+            if (e.shiftKey){
+                switch (e.keyCode) {
+                    case 37:
+                        //console.log('left');
+                        previousEntryUncoupled(1);
+                        break;
+                    case 39:
+                        //console.log('right');
+                        nextEntryUncoupled(1);
+                        break;
+                    case 38:
+                        //console.log('up');
+                        previousEntryUncoupled(2);
+                        break;
+                    case 40:
+                        //console.log('down');
+                        nextEntryUncoupled(2);
+                        break;
+                }
+            } else {
+                switch (e.keyCode) {
+                    case 37:
+                        //console.log('left');
+                        previousEntry();
+                        stopAutoplay();
+                        break;
+                    case 39:
+                        //console.log('right');
+                        nextEntry();
+                        stopAutoplay();
+                        break;
+                }
             }
         });
 
