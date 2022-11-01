@@ -301,6 +301,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // content navigation 
         
         function nextEntry(){
+            if (i == data1.length-2){
+                stopAutoplay();
+            }
             if (i < data1.length-1){
                 i++;
             } else {
@@ -308,6 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             //console.log(i);
             setHtml(i);
+
         }
         function previousEntry(){
             if (i > 0){
@@ -362,7 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
         var iframe = document.querySelector('iframe');
         var player = new Vimeo.Player(iframe);
         player.on('ended', function() {
-            console.log('Video ended');
+            // console.log('Video ended');
             hideVideo();
             startAutoplay(6000);
         });
