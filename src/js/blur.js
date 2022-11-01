@@ -93,10 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
         let data2 = []
         let i = 0;
         let v = 4;
-        let t = "";
+        // let t = "";
 
-
-        
+  
         function parseData(){
             dataParsed = data.map(obj => {
                 let rObj = {}
@@ -298,12 +297,67 @@ document.addEventListener("DOMContentLoaded", () => {
     //         setHtml(i);
     //    });
 
+
+
+
+    function hideVideo(){
+        videoContainer.classList.add('hidden');
+    }
+    // hide and autoplay after vimeo player ended event
+    const iframe = document.querySelector('iframe');
+    const player = new Vimeo.Player(iframe);
+    player.on('ended', function() {
+        // console.log('Video ended');
+        hideVideo();
+        autoplay();
+    });
+
+    // to do : accelerate autoplay
+    // using settimeout instead of setinterval
+    // https://www.geeksforgeeks.org/how-to-change-the-time-interval-of-setinterval-method-at-runtime-using-javascript/
+
+
+    // Timer
+    let t = 6000;
+    let timer;
+
+    //autoplay();
+     
+    // Function that changes the timer
+    function changeTimer(){
+        t = t * 0.95;
+        // console.log(t);
+    }
+
+    // Function to run at irregular intervals
+    function autoplay() {
+        nextEntry();
+        
+        if (i < data1.length-1){
+            changeTimer();
+            timer = setTimeout(autoplay, t);
+        }
+        
+    }
+
+    function stopAutoplay(){
+        clearTimeout(timer);
+        t = 6000;
+        console.log('Stop Autoplay'); 
+    }
+    
+
+
+
+
+
         // content navigation 
         
         function nextEntry(){
-            if (i == data1.length-2){
-                stopAutoplay();
-            }
+            // // restarts autoplay
+            // if (i == data1.length-2){
+            //     stopAutoplay();
+            // }
             if (i < data1.length-1){
                 i++;
             } else {
@@ -349,33 +403,12 @@ document.addEventListener("DOMContentLoaded", () => {
             
         }
         
-          
-        // autoplay
-        let intervalID
-        function startAutoplay(interval){
-            intervalID = setInterval(nextEntry, interval);
-        }
-        function stopAutoplay(){
-            clearInterval(intervalID);
-        }
-
-        function hideVideo(){
-            videoContainer.classList.add('hidden');
-        }
-        // hide and autoplay after vimeo player ended event
-        var iframe = document.querySelector('iframe');
-        var player = new Vimeo.Player(iframe);
-        player.on('ended', function() {
-            // console.log('Video ended');
-            hideVideo();
-            startAutoplay(6000);
-        });
-
+        
         
 
         // next on click
         cave1.addEventListener('click', (event) => {
-            stopAutoplay();
+            stopAutoplay(); 
             nextEntry()
         });
         cave2.addEventListener('click', (event) => {

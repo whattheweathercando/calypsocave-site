@@ -173,7 +173,7 @@ a {
     height: 100vh;
     padding:62.5% 0 0 0;
     z-index: 2;
-    border-radius: 1rem;
+    /* border-radius: 1rem; */
     background-color: white;
 }
 
