@@ -24,6 +24,7 @@ const dateSource2 = document.querySelector('#date-source-2');
 const icon2 = document.querySelector('#icon-2');
 
 const videoContainer = document.querySelector('.video-container');
+const popup = document.querySelector('.popup');
 
 const nextButton = document.querySelector('#next-button');
 const prevButton = document.querySelector('#prev-button');
@@ -299,13 +300,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
+    function hidePopup(){
+        popup.classList.add('hidden');
+    }
     function hideVideo(){
         videoContainer.classList.add('hidden');
     }
-    // hide and autoplay after vimeo player ended event
+    
+    // hide video and autoplay after vimeo player ended event
     const iframe = document.querySelector('iframe');
     const player = new Vimeo.Player(iframe);
+    player.on('play', function(){
+        hidePopup();
+    });
     player.on('ended', function() {
         // console.log('Video ended');
         hideVideo();
