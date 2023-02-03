@@ -28,6 +28,7 @@ const tagSelect = document.querySelector('#tag-select');
 const navToggle = document.querySelector('#nav-toggle');
 const nav = document.querySelector('#nav');
 const select = document.querySelector('#select');
+const footer = document.querySelector('footer');
 
 const views = [
     "book",
@@ -295,8 +296,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         navToggle.addEventListener('click', function(){
+            if (footer.classList.contains('active')){
+                this.innerHTML = '>';
+            } else {
+                this.innerHTML = '<';
+            };
+            footer.classList.toggle('active');
             nav.classList.toggle('hidden');
             select.classList.toggle('hidden');
+            
+            
         });
         nextButton.addEventListener('click', nextEntry);
         prevButton.addEventListener('click', previousEntry);

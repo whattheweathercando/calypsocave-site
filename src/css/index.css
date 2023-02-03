@@ -1,13 +1,14 @@
 
 :root {
     --font-size-base: 18px;
-    --font-size-small: 0.75rem;
+    --font-size-small: 0.65rem;
     --font-size-large: 2rem;
     --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, Arial, "Helvetica Neue", sans-serif;
     --font-family-sans-2: "Lucida Grande", Verdana, sans-serif;
     --font-family-sans-1: Helvetica, Arial, sans-serif;
     --font-family-mono: "Fira Code", monospace;
-    --column-width: calc(100vw / 2.75);
+    --footer-height: 3rem;
+    --column-width: calc(100vw / 3);
     --column-gap: calc( (100vw - (2 * var(--column-width))) / 3);
 }
 
@@ -22,26 +23,34 @@ body {
 
 
 footer {
-    display: grid;
+    display: flex;
     /* display: none; */
-    grid-template-columns: auto 10fr auto;
-    column-gap: 1rem;
+    /* justify-content: space-between; */
+    align-items: center;
     position: fixed;
     bottom: 0;
-    width: 100vw;
-    height: auto;
+    width: auto;
+    height: var(--footer-height);
     padding: 1em;
-    font-size: var(--font-size-small);
-    /* background-color: white; */
+    background-color: white;
     /* border-top: 1px solid black; */
+}
+footer, select, button {
+    font-size: var(--font-size-small);
 }
 .hidden {
     display: none;
 }
+.active {
+    width: 100vw;
+}
 button, select {
+    cursor: pointer;
+}
+#nav-toggle, #select {
+    margin-right: 2rem;
     background-color: transparent;
     border: none;
-    cursor: pointer;
 }
 
 #main-grid {

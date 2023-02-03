@@ -319,7 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
         autoplay();
     });
 
-    // to do : accelerate autoplay
+    // accelerate autoplay
     // using settimeout instead of setinterval
     // https://www.geeksforgeeks.org/how-to-change-the-time-interval-of-setinterval-method-at-runtime-using-javascript/
 
